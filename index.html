@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kozia Bagry Apartments · Kraków</title>
+<meta name="description" content="Przytulny apartament przy Zalewie Bagry w Krakowie. Samodzielne zameldowanie, balkon, klimatyzacja. Jak dojechać, co zobaczyć i 10 pomysłów na weekend w Krakowie.">
+<meta property="og:title" content="Kozia Bagry Apartments · Kraków">
+<meta property="og:description" content="Apartament przy Zalewie Bagry, 5 minut od tężni i plaży. Przewodnik po Krakowie dla naszych gości.">
+<meta property="og:image" content="img/salon.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+<style>
+  :root { --ink: #1f2326; --muted: #5c646b; --line: #e6e1d6; --bg: #fbf9f5; --card: #fff; --gold: #b0882b; --gold-soft: #f6efe0; --accent: #2f4a3a; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  a { color: var(--accent); }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  header.top { position: sticky; top: 0; z-index: 10; background: rgba(251, 249, 245, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: center; gap: 18px; height: 60px; }
+  .logo { font-weight: 700; letter-spacing: .02em; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .logo span { color: var(--gold); }
+  nav.menu { display: flex; gap: 16px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  nav.menu a { text-decoration: none; color: var(--muted); font-size: 14px; white-space: nowrap; }
+  nav.menu a:hover { color: var(--ink); }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; flex: none; }
+  .lang button { border: 0; background: none; padding: 5px 11px; font: inherit; font-size: 13px; cursor: pointer; color: var(--muted); }
+  .lang button.on { background: var(--ink); color: #fff; }
+  html[data-l="pl"] [lang="en"], html[data-l="en"] [lang="pl"] { display: none !important; }
+
+  .hero { position: relative; min-height: 78vh; display: grid; align-items: end; color: #fff; overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05) 30%, rgba(0,0,0,.65)); }
+  .hero .wrap { position: relative; z-index: 1; padding-bottom: 56px; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 12px; font-weight: 600; color: var(--gold); }
+  .hero .eyebrow { color: #f3d48a; }
+  h1 { font-size: clamp(34px, 6vw, 60px); line-height: 1.08; margin: 10px 0 12px; letter-spacing: -.01em; }
+  .hero p { font-size: clamp(16px, 2vw, 20px); max-width: 640px; margin: 0 0 22px; opacity: .95; }
+  .btn { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--gold); color: #fff; text-decoration: none; font-weight: 600; }
+  .btn.ghost { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.5); margin-left: 8px; }
+
+  section.block { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: clamp(26px, 3.4vw, 36px); margin: 8px 0 14px; letter-spacing: -.01em; }
+  .lead { color: var(--muted); max-width: 760px; font-size: 17px; margin: 0 0 28px; }
+  .grid { display: grid; gap: 18px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 600; color: var(--gold); background: var(--gold-soft); padding: 2px 9px; border-radius: 999px; margin-bottom: 8px; }
+
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px; gap: 10px; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; cursor: zoom-in; }
+  .gallery .big { grid-column: span 2; grid-row: span 2; }
+  @media (max-width: 760px) { .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; } }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 26px; }
+  .fact { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .fact b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); }
+  .fact span { font-size: 16px; font-weight: 600; }
+
+  .ideas { counter-reset: idea; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .idea { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .idea img { height: 200px; width: 100%; object-fit: cover; }
+  .idea .in { padding: 18px 20px 20px; }
+  .idea h3 { margin: 0 0 6px; font-size: 18px; display: flex; gap: 10px; align-items: baseline; }
+  .idea h3::before { counter-increment: idea; content: counter(idea); flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 14px; }
+  .idea p { margin: 0; color: var(--muted); font-size: 15px; }
+  .idea .how { margin-top: 10px; font-size: 13px; color: var(--accent); font-weight: 600; }
+
+  table.near { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  table.near td { padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 15px; vertical-align: top; }
+  table.near tr:last-child td { border-bottom: 0; }
+  table.near td:last-child { text-align: right; white-space: nowrap; color: var(--muted); }
+  table.near td small { color: var(--muted); display: block; }
+  .map { border: 0; width: 100%; height: 380px; border-radius: 14px; margin-top: 22px; }
+
+  .route { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .route .card ol { margin: 8px 0 0; padding-left: 20px; color: var(--muted); font-size: 15px; }
+  .route .card li { margin-bottom: 4px; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 18px; }
+
+  footer { padding: 46px 0 60px; color: var(--muted); font-size: 13px; }
+  footer .credits { margin-top: 14px; font-size: 12px; }
+  .lb { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; place-items: center; z-index: 50; cursor: zoom-out; }
+  .lb.on { display: grid; }
+  .lb img { max-width: 94vw; max-height: 90vh; border-radius: 8px; }
+</style>
+</head>
+<body>
+<script>document.documentElement.dataset.l = localStorage.getItem("l") || ((navigator.language || "pl").startsWith("pl") ? "pl" : "en");</script>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#">Kozia <span>Bagry</span> Apartments</a>
+    <nav class="menu">
+      <a href="#apartament"><span lang="pl">Apartament</span><span lang="en">Apartment</span></a>
+      <a href="#okolica"><span lang="pl">Okolica</span><span lang="en">Neighbourhood</span></a>
+      <a href="#weekend"><span lang="pl">Weekend w Krakowie</span><span lang="en">Weekend in Kraków</span></a>
+      <a href="#dojazd"><span lang="pl">Dojazd</span><span lang="en">Getting here</span></a>
+      <a href="#porady"><span lang="pl">Porady</span><span lang="en">Tips</span></a>
+    </nav>
+    <div class="lang"><button data-set="pl">PL</button><button data-set="en">EN</button></div>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="img/salon.jpg" alt="Salon apartamentu Kozia Bagry">
+  <div class="wrap">
+    <div class="eyebrow">Kraków · Płaszów · Zalew Bagry</div>
+    <h1 lang="pl">Spokojny apartament<br>przy Zalewie Bagry</h1>
+    <h1 lang="en">A calm apartment<br>by Bagry Lake</h1>
+    <p lang="pl">Nowoczesne mieszkanie w nowym budynku przy ul. Koziej 5. Kilka minut pieszo od plaży i tężni solankowej, kilkanaście minut do Kazimierza i Starego Miasta. Samodzielne zameldowanie o dowolnej porze od 15:00.</p>
+    <p lang="en">A modern flat in a new building at Kozia 5. A few minutes' walk to the lake beach and the brine graduation tower, a short ride to Kazimierz and the Old Town. Self check-in any time from 15:00.</p>
+    <a class="btn" href="https://www.booking.com/searchresults.html?ss=Kozia+Bagry+Apartments" target="_blank" rel="noopener"><span lang="pl">Zarezerwuj na Booking.com</span><span lang="en">Book on Booking.com</span></a>
+    <a class="btn ghost" href="#weekend"><span lang="pl">Co robić w Krakowie</span><span lang="en">Things to do</span></a>
+  </div>
+</section>
+
+<section class="block" id="apartament">
+  <div class="wrap">
+    <div class="eyebrow"><span lang="pl">Apartament</span><span lang="en">The apartment</span></div>
+    <h2 lang="pl">Ciepłe wnętrze, wszystko na miejscu</h2>
+    <h2 lang="en">A warm interior with everything you need</h2>
+    <p class="lead" lang="pl">Jasny salon z jadalnią, osobna sypialnia, w pełni wyposażona kuchnia z czajnikiem i zestawem herbat, łazienka z prysznicem i balkon z widokiem na zieleń. W środku klimatyzacja i szybkie Wi-Fi.</p>
+    <p class="lead" lang="en">A bright living room with a dining area, a separate bedroom, a fully equipped kitchen with a kettle and a tea selection, a bathroom with a walk-in shower and a balcony overlooking greenery. Air conditioning and fast Wi-Fi inside.</p>
+    <div class="gallery">
+      <img class="big" src="img/salon.jpg" alt="Salon">
+      <img src="img/sypialnia.jpg" alt="Sypialnia">
+      <img src="img/jadalnia.jpg" alt="Jadalnia">
+      <img src="img/kuchnia.jpg" alt="Kuchnia">
+      <img src="img/lazienka.jpg" alt="Łazienka">
+      <img src="img/sypialnia-2.jpg" alt="Łóżko">
+      <img src="img/balkon.jpg" alt="Balkon">
+      <img src="img/herbata.jpg" alt="Kącik kawowo-herbaciany">
+      <img src="img/budynek.jpg" alt="Budynek Kozia 5">
+    </div>
+    <div class="facts">
+      <div class="fact"><b lang="pl">Zameldowanie</b><b lang="en">Check-in</b><span lang="pl">od 15:00, samodzielne</span><span lang="en">from 15:00, self check-in</span></div>
+      <div class="fact"><b lang="pl">Wymeldowanie</b><b lang="en">Check-out</b><span lang="pl">do 11:00</span><span lang="en">by 11:00</span></div>
+      <div class="fact"><b lang="pl">Wejście</b><b lang="en">Entry</b><span lang="pl">osobisty kod do drzwi</span><span lang="en">personal door code</span></div>
+      <div class="fact"><b lang="pl">Piętro</b><b lang="en">Floor</b><span lang="pl">1. piętro, winda</span><span lang="en">1st floor, lift</span></div>
+      <div class="fact"><b>Wi-Fi</b><span lang="pl">w cenie</span><span lang="en">included</span></div>
+      <div class="fact"><b lang="pl">Klimatyzacja</b><b lang="en">Air conditioning</b><span lang="pl">tak</span><span lang="en">yes</span></div>
+    </div>
+    <p class="note" lang="pl">Kod do drzwi i szczegółową instrukcję wejścia ze zdjęciami wysyłamy przed przyjazdem. Kod działa od 15:00 w dniu przyjazdu do 11:00 w dniu wyjazdu.</p>
+    <p class="note" lang="en">We send your door code and a step-by-step entry guide with photos before arrival. The code works from 15:00 on arrival day until 11:00 on departure day.</p>
+  </div>
+</section>
+
+<section class="block" id="okolica">
+  <div class="wrap">
+    <div class="eyebrow"><span lang="pl">Na spacer</span><span lang="en">Within walking distance</span></div>
+    <h2 lang="pl">Co jest blisko Koziej 5</h2>
+    <h2 lang="en">What's near Kozia 5</h2>
+    <p class="lead" lang="pl">Bagry to zielona, spokojna część Podgórza. Obok jest duży zalew z plażami i ścieżką dookoła, a sklepy, kawiarnie i przystanki są w zasięgu kilku minut pieszo. Czasy to szacunkowe czasy marszu.</p>
+    <p class="lead" lang="en">Bagry is a green, quiet part of Podgórze. Right next door is a large lake with beaches and a loop path, with shops, cafés and stops a few minutes away. Times are estimated walking times.</p>
+    <table class="near">
+      <tr><td>🌊 <b lang="pl">Tężnia solankowa</b><b lang="en">Brine graduation tower</b><small lang="pl">Oddychaj solanką jak w uzdrowisku, wstęp wolny</small><small lang="en">Breathe salty air like in a spa resort, free entry</small></td><td>3 min</td></tr>
+      <tr><td>🏖️ <b lang="pl">Zalew Bagry: plaża i park Bagry Wielkie</b><b lang="en">Bagry Lake: beach and Bagry Wielkie park</b><small lang="pl">Strzeżone kąpielisko latem, pomosty, plac zabaw, siłownia plenerowa, ścieżka dookoła wody</small><small lang="en">Lifeguarded beach in summer, piers, playground, outdoor gym, a loop path around the water</small></td><td>5–10 min</td></tr>
+      <tr><td>🛒 <b lang="pl">Sklepy</b><b lang="en">Shops</b><small>Spar, Żabka, Lewiatan, Biedronka, Lidl</small></td><td><span lang="pl">od 2 min</span><span lang="en">from 2 min</span></td></tr>
+      <tr><td>☕ <b lang="pl">Jedzenie i kawa</b><b lang="en">Food and coffee</b><small lang="pl">Peron Bagry (kawa, lody, pizza), Tawerna Horn, Peperone (kuchnia włoska), Vatti (indyjska, nepalska, wietnamska), Czarna Krowa (burgery)</small><small lang="en">Peron Bagry (coffee, ice cream, pizza), Tawerna Horn, Peperone (Italian), Vatti (Indian, Nepalese, Vietnamese), Czarna Krowa (burgers)</small></td><td>5–15 min</td></tr>
+      <tr><td>💊 <b lang="pl">Apteka</b><b lang="en">Pharmacy</b><small>Apteka Hygieia</small></td><td>~10 min</td></tr>
+      <tr><td>🚌 <b lang="pl">Przystanek autobusowy Bagry Tężnia / Grochowa</b><b lang="en">Bus stop Bagry Tężnia / Grochowa</b></td><td>4 min</td></tr>
+      <tr><td>🚋 <b lang="pl">Tramwaj i P+R Mały Płaszów</b><b lang="en">Tram and park & ride Mały Płaszów</b><small lang="pl">Tramwaje w stronę Podgórza i centrum, autobus A58 do Wieliczki</small><small lang="en">Trams towards Podgórze and the centre, bus A58 to Wieliczka</small></td><td>9 min</td></tr>
+      <tr><td>🚆 <b lang="pl">Stacja kolejowa Kraków Prokocim</b><b lang="en">Kraków Prokocim train station</b><small lang="pl">Pociąg SKA1: lotnisko, Kraków Główny, Wieliczka</small><small lang="en">SKA1 train: airport, Kraków Główny, Wieliczka</small></td><td>18 min</td></tr>
+      <tr><td>🧭 <b lang="pl">Znak południka 20°E</b><b lang="en">20°E meridian marker</b><small lang="pl">Zdjęcie z jedną nogą na każdej „połówce” Polski</small><small lang="en">A photo with a foot on each side of the meridian</small></td><td>14 min</td></tr>
+      <tr><td>🚂 <b lang="pl">Zabytkowa lokomotywownia Płaszów</b><b lang="en">Historic Płaszów engine sheds</b><small lang="pl">Wachlarzowe hale parowozowni i stare lokomotywy, gratka dla fanów kolei</small><small lang="en">Fan-shaped roundhouses and old steam engines, a treat for railway fans</small></td><td>25 min</td></tr>
+      <tr><td>🏰 <b lang="pl">Fort 50a „Lasówka”</b><b lang="en">Fort 50a "Lasówka"</b><small lang="pl">Fragment dawnej Twierdzy Kraków</small><small lang="en">Part of the former Kraków Fortress</small></td><td>26 min</td></tr>
+      <tr><td>🏭 <b lang="pl">Zabłocie: Fabryka Schindlera i MOCAK</b><b lang="en">Zabłocie: Schindler's Factory and MOCAK</b></td><td><span lang="pl">45–50 min pieszo / 15 min autobusem</span><span lang="en">45–50 min walk / 15 min by bus</span></td></tr>
+    </table>
+    <iframe class="map" loading="lazy" title="Mapa" src="https://www.openstreetmap.org/export/embed.html?bbox=19.975%2C50.025%2C20.02%2C50.044&amp;layer=mapnik&amp;marker=50.0348%2C19.9992"></iframe>
+    <p class="note"><a href="https://www.openstreetmap.org/?mlat=50.0348&amp;mlon=19.9992#map=16/50.0348/19.9992" target="_blank" rel="noopener"><span lang="pl">Otwórz większą mapę</span><span lang="en">Open a larger map</span></a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Kozia%205%2C%20Krak%C3%B3w" target="_blank" rel="noopener">Google Maps</a></p>
+  </div>
+</section>
+
+<section class="block" id="weekend">
+  <div class="wrap">
+    <div class="eyebrow">Kraków</div>
+    <h2 lang="pl">10 pomysłów na weekend w Krakowie</h2>
+    <h2 lang="en">10 ideas for a weekend in Kraków</h2>
+    <p class="lead" lang="pl">Najlepiej łączyć je w pary: rano zabytki, popołudniu spacer nad Wisłą, wieczorem Kazimierz. Ze stacji Kraków Prokocim pociągiem SKA1 dojedziesz do Krakowa Głównego w ok. 10 minut, a taksówką do Starego Miasta jedzie się zwykle 15–20 minut.</p>
+    <p class="lead" lang="en">They pair up nicely: sights in the morning, a riverside walk in the afternoon, Kazimierz in the evening. The SKA1 train from Kraków Prokocim reaches Kraków Główny in about 10 minutes, and a taxi to the Old Town usually takes 15–20 minutes.</p>
+    <div class="ideas">
+      <article class="idea"><img src="img/krk-rynek.jpg" alt="Rynek Główny i Sukiennice" loading="lazy"><div class="in">
+        <h3 lang="pl">Rynek Główny i Sukiennice</h3><h3 lang="en">Main Square and the Cloth Hall</h3>
+        <p lang="pl">Jeden z największych średniowiecznych placów Europy. Posłuchaj hejnału z wieży Mariackiej o pełnej godzinie, zajrzyj do ołtarza Wita Stwosza i zejdź do Podziemi Rynku.</p>
+        <p lang="en">One of Europe's largest medieval squares. Hear the bugle call from St Mary's tower on the hour, see the Veit Stoss altarpiece and go down to the Rynek Underground museum.</p>
+        <div class="how" lang="pl">Pół dnia · SKA1 do Krakowa Głównego + 10 min pieszo</div><div class="how" lang="en">Half a day · SKA1 to Kraków Główny + 10 min walk</div></div></article>
+      <article class="idea"><img src="img/krk-wawel.jpg" alt="Wawel" loading="lazy"><div class="in">
+        <h3 lang="pl">Wawel: zamek, katedra i Smok</h3><h3 lang="en">Wawel: castle, cathedral and the Dragon</h3>
+        <p lang="pl">Królewski zamek, katedra z dzwonem Zygmunta i Smocza Jama ze ziejącym ogniem smokiem nad Wisłą. Bilety na komnaty warto kupić online z wyprzedzeniem.</p>
+        <p lang="en">The royal castle, the cathedral with the Sigismund Bell and the Dragon's Den with a fire-breathing dragon by the river. Book state room tickets online in advance.</p>
+        <div class="how" lang="pl">Pół dnia</div><div class="how" lang="en">Half a day</div></div></article>
+      <article class="idea"><img src="img/krk-kazimierz.jpg" alt="Kazimierz, ulica Szeroka" loading="lazy"><div class="in">
+        <h3 lang="pl">Kazimierz: klimat, jedzenie, wieczór</h3><h3 lang="en">Kazimierz: atmosphere, food and nightlife</h3>
+        <p lang="pl">Dawna dzielnica żydowska: synagogi przy Szerokiej, zapiekanki z okrąglaka na Placu Nowym, małe kawiarnie i bary. Najlepszy na wieczór.</p>
+        <p lang="en">The former Jewish quarter: synagogues on Szeroka Street, zapiekanka from the round hall on Plac Nowy, cosy cafés and bars. Best in the evening.</p>
+        <div class="how" lang="pl">Wieczór · ok. 15 min taksówką</div><div class="how" lang="en">Evening · about 15 min by taxi</div></div></article>
+      <article class="idea"><img src="img/krk-bulwary.jpg" alt="Bulwary Wiślane" loading="lazy"><div class="in">
+        <h3 lang="pl">Kładka Bernatka i bulwary nad Wisłą</h3><h3 lang="en">Bernatek footbridge and the Vistula boulevards</h3>
+        <p lang="pl">Przejdź kładką z Kazimierza do Podgórza, popatrz na akrobatów nad głową, a potem spaceruj bulwarami pod Wawel. Latem możesz wsiąść na krótki rejs statkiem.</p>
+        <p lang="en">Cross the footbridge from Kazimierz to Podgórze, look up at the acrobat sculptures, then stroll along the river to Wawel. In summer you can hop on a short boat cruise.</p>
+        <div class="how" lang="pl">2–3 godziny</div><div class="how" lang="en">2–3 hours</div></div></article>
+      <article class="idea"><img src="img/krk-bernatka.jpg" alt="Kładka Ojca Bernatka, Podgórze" loading="lazy"><div class="in">
+        <h3 lang="pl">Podgórze: Fabryka Schindlera i MOCAK</h3><h3 lang="en">Podgórze: Schindler's Factory and MOCAK</h3>
+        <p lang="pl">Poruszająca wystawa o Krakowie w czasie okupacji w Fabryce Emalia Oskara Schindlera, a obok muzeum sztuki współczesnej MOCAK. Zajrzyj też na Plac Bohaterów Getta.</p>
+        <p lang="en">A moving exhibition on wartime Kraków in Oskar Schindler's Enamel Factory, with the MOCAK contemporary art museum next door. Also see Ghetto Heroes Square.</p>
+        <div class="how" lang="pl">Pół dnia · najbliższe od nas: ok. 15 min</div><div class="how" lang="en">Half a day · closest from us: about 15 min</div></div></article>
+      <article class="idea"><img src="img/krk-krakus.jpg" alt="Kopiec Krakusa o wschodzie słońca" loading="lazy"><div class="in">
+        <h3 lang="pl">Zachód słońca na Kopcu Krakusa</h3><h3 lang="en">Sunset on Krakus Mound</h3>
+        <p lang="pl">Najstarszy kopiec Krakowa z panoramą na całe miasto i Tatry przy dobrej pogodzie. Pod spodem dawny kamieniołom Liban. Wstęp wolny.</p>
+        <p lang="en">Kraków's oldest mound with a view over the whole city, and the Tatras on a clear day. The old Liban quarry lies below. Free entry.</p>
+        <div class="how" lang="pl">1–2 godziny · ok. 10 min autem</div><div class="how" lang="en">1–2 hours · about 10 min by car</div></div></article>
+      <article class="idea"><img src="img/krk-wieliczka.jpg" alt="Kaplica św. Kingi w Kopalni Soli Wieliczka" loading="lazy"><div class="in">
+        <h3 lang="pl">Kopalnia Soli „Wieliczka”</h3><h3 lang="en">Wieliczka Salt Mine</h3>
+        <p lang="pl">Podziemne kaplice wyrzeźbione w soli, w tym zachwycająca kaplica św. Kingi. Z Kozia 5 to jedna z najbliższych wielkich atrakcji: pociąg SKA1 ze stacji Prokocim jedzie prosto do Wieliczki.</p>
+        <p lang="en">Underground chapels carved in salt, including the stunning St Kinga's Chapel. One of the closest big sights from Kozia 5: the SKA1 train from Prokocim goes straight to Wieliczka.</p>
+        <div class="how" lang="pl">Pół dnia · SKA1 ok. 20 min</div><div class="how" lang="en">Half a day · SKA1 about 20 min</div></div></article>
+      <article class="idea"><img src="img/krk-bagry.jpg" alt="Zalew Bagry" loading="lazy"><div class="in">
+        <h3 lang="pl">Poranek nad Zalewem Bagry</h3><h3 lang="en">A morning at Bagry Lake</h3>
+        <p lang="pl">Bieganie lub spacer dookoła zalewu, chwila przy tężni, a latem plaża, kąpiel i deska SUP. Wszystko 5 minut od drzwi.</p>
+        <p lang="en">A run or a walk around the lake, a moment by the brine tower, and in summer the beach, a swim and stand-up paddleboarding. All five minutes from the door.</p>
+        <div class="how" lang="pl">1–3 godziny · pieszo</div><div class="how" lang="en">1–3 hours · on foot</div></div></article>
+      <article class="idea"><div class="in">
+        <h3 lang="pl">Nowa Huta i Ogród Doświadczeń im. Lema</h3><h3 lang="en">Nowa Huta and the Lem Garden of Experiences</h3>
+        <p lang="pl">Socrealistyczne miasto-ideał z lat 50., Plac Centralny i aleja Róż. Z dziećmi koniecznie Ogród Doświadczeń: plenerowe eksperymenty z fizyki (sezon wiosna–jesień).</p>
+        <p lang="en">The 1950s socialist-realist ideal town, Central Square and Róż Avenue. With kids, don't miss the Garden of Experiences: outdoor physics experiments (spring to autumn).</p>
+        <div class="how" lang="pl">Pół dnia · ok. 15 min autem</div><div class="how" lang="en">Half a day · about 15 min by car</div></div></article>
+      <article class="idea"><div class="in">
+        <h3 lang="pl">Rowerem wzdłuż Wisły do Tyńca</h3><h3 lang="en">Cycle along the Vistula to Tyniec</h3>
+        <p lang="pl">Wypożycz rower miejski i jedź bulwarami wiślaną trasą rowerową do opactwa benedyktynów w Tyńcu na wapiennej skale. Wróć statkiem albo autobusem.</p>
+        <p lang="en">Rent a city bike and ride the Vistula cycle path to the Benedictine abbey in Tyniec on a limestone cliff. Come back by boat or bus.</p>
+        <div class="how" lang="pl">Cały dzień</div><div class="how" lang="en">Full day</div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="dojazd">
+  <div class="wrap">
+    <div class="eyebrow"><span lang="pl">Dojazd</span><span lang="en">Getting here</span></div>
+    <h2 lang="pl">Jak do nas dojechać</h2>
+    <h2 lang="en">How to get to us</h2>
+    <p class="lead" lang="pl">Adres: <b>ul. Kozia 5, 30-733 Kraków</b> (Płaszów, Podgórze). Najwygodniejsza jest kolej SKA1 do stacji <b>Kraków Prokocim</b>, skąd jest 18 minut spacerem.</p>
+    <p class="lead" lang="en">Address: <b>ul. Kozia 5, 30-733 Kraków</b> (Płaszów, Podgórze). The handiest option is the SKA1 train to <b>Kraków Prokocim</b>, then an 18-minute walk.</p>
+    <div class="route">
+      <div class="card"><span class="tag">✈️ <span lang="pl">Z lotniska Kraków-Balice</span><span lang="en">From Kraków Airport</span></span>
+        <h3 lang="pl">Pociąg SKA1, bez przesiadki</h3><h3 lang="en">SKA1 train, no change</h3>
+        <ol lang="pl"><li>Ze stacji <b>Kraków Lotnisko</b> (krytym przejściem z terminalu) wsiądź w pociąg SKA1 w kierunku <b>Wieliczka Rynek-Kopalnia</b>.</li><li>Wysiądź na stacji <b>Kraków Prokocim</b> (ok. 30–35 min).</li><li>Dojdź pieszo na ul. Kozią 5: ok. 1,3 km, 18 min.</li></ol>
+        <ol lang="en"><li>From <b>Kraków Lotnisko</b> station (covered walkway from the terminal) take the SKA1 train towards <b>Wieliczka Rynek-Kopalnia</b>.</li><li>Get off at <b>Kraków Prokocim</b> (about 30–35 min).</li><li>Walk to Kozia 5: about 1.3 km, 18 min.</li></ol>
+        <p style="margin-top:10px" lang="pl">Taksówka, Uber lub Bolt: ok. 30–40 minut, zależnie od korków.</p>
+        <p style="margin-top:10px" lang="en">Taxi, Uber or Bolt: about 30–40 minutes depending on traffic.</p>
+        <p class="note" lang="pl">Nie każdy kurs z lotniska jedzie dalej niż Kraków Główny. Jeśli Twój kończy bieg na Głównym, przesiądź się tam na SKA1 w stronę Wieliczki.</p>
+        <p class="note" lang="en">Not every airport train continues past Kraków Główny. If yours terminates there, change to an SKA1 train towards Wieliczka.</p>
+      </div>
+      <div class="card"><span class="tag">🚉 <span lang="pl">Z dworca Kraków Główny</span><span lang="en">From Kraków Główny station</span></span>
+        <h3 lang="pl">Pociąg, autobus albo taksówka</h3><h3 lang="en">Train, bus or taxi</h3>
+        <ol lang="pl"><li><b>Pociąg:</b> SKA1 w kierunku Wieliczki do stacji <b>Kraków Prokocim</b> (ok. 10–12 min), potem 18 min pieszo.</li><li><b>Taksówka:</b> ok. 15–20 min.</li><li><b>Komunikacja miejska:</b> kilka autobusów i tramwajów z przesiadką. Najlepszą trasę na teraz pokaże <a href="https://jakdojade.pl/krakow" target="_blank" rel="noopener">jakdojade.pl</a>.</li></ol>
+        <ol lang="en"><li><b>Train:</b> SKA1 towards Wieliczka to <b>Kraków Prokocim</b> (about 10–12 min), then an 18-minute walk.</li><li><b>Taxi:</b> about 15–20 min.</li><li><b>Public transport:</b> several bus and tram options with one change. <a href="https://jakdojade.pl/krakow" target="_blank" rel="noopener">jakdojade.pl</a> shows the best current route.</li></ol>
+      </div>
+      <div class="card"><span class="tag">🚆 <span lang="pl">Ze stacji Kraków Płaszów</span><span lang="en">From Kraków Płaszów station</span></span>
+        <h3 lang="pl">Spacer, pociąg albo krótki kurs</h3><h3 lang="en">Walk, train or a short ride</h3>
+        <ol lang="pl"><li><b>Pieszo:</b> ok. 2,3 km, 28 minut, w większości wzdłuż ulic Płaszowa i Bagrów.</li><li><b>Pociąg:</b> jeden przystanek SKA1 w stronę Wieliczki do <b>Kraków Prokocim</b>, potem 18 min pieszo.</li><li><b>Taksówka:</b> ok. 5–7 minut.</li></ol>
+        <ol lang="en"><li><b>On foot:</b> about 2.3 km, 28 minutes, mostly through Płaszów and Bagry streets.</li><li><b>Train:</b> one SKA1 stop towards Wieliczka to <b>Kraków Prokocim</b>, then an 18-minute walk.</li><li><b>Taxi:</b> about 5–7 minutes.</li></ol>
+      </div>
+      <div class="card"><span class="tag">🚗 <span lang="pl">Samochodem</span><span lang="en">By car</span></span>
+        <h3 lang="pl">Wygodnie z obwodnicy</h3><h3 lang="en">Easy from the ring road</h3>
+        <p lang="pl">Ustaw nawigację na „Kozia 5, Kraków”. Z autostrady A4 zjedź na węźle Kraków Bieżanów lub Kraków Łagiewniki. W okolicy są miejsca do parkowania na ulicy, a przy pętli Mały Płaszów działa parking P+R (9 min pieszo).</p>
+        <p lang="en">Set your navigation to "Kozia 5, Kraków". From the A4 motorway exit at Kraków Bieżanów or Kraków Łagiewniki. There is street parking nearby and a park & ride at Mały Płaszów (9 min walk).</p>
+      </div>
+    </div>
+    <p class="note" lang="pl">Czasy są orientacyjne. Rozkład pociągów sprawdzisz na <a href="https://www.kolejemalopolskie.com.pl" target="_blank" rel="noopener">kolejemalopolskie.com.pl</a>, a bilety kupisz w automacie, w aplikacji albo u konduktora.</p>
+    <p class="note" lang="en">Times are approximate. Check train times at <a href="https://www.kolejemalopolskie.com.pl" target="_blank" rel="noopener">kolejemalopolskie.com.pl</a>. Buy tickets from a machine, in the app or from the conductor.</p>
+  </div>
+</section>
+
+<section class="block" id="porady">
+  <div class="wrap">
+    <div class="eyebrow"><span lang="pl">Dobrze wiedzieć</span><span lang="en">Good to know</span></div>
+    <h2 lang="pl">Kilka praktycznych porad</h2>
+    <h2 lang="en">A few practical tips</h2>
+    <div class="grid g3">
+      <div class="card"><h3 lang="pl">🎫 Bilety komunikacji</h3><h3 lang="en">🎫 Public transport tickets</h3><p lang="pl">Bilet czasowy kupisz w automacie w tramwaju lub autobusie (płatność kartą) albo w aplikacji. Na weekend opłaca się bilet 24- lub 48-godzinny.</p><p lang="en">Buy a time ticket from the machine on board (card payment) or in an app. For a weekend a 24- or 48-hour ticket is good value.</p></div>
+      <div class="card"><h3 lang="pl">🍽️ Co zjeść</h3><h3 lang="en">🍽️ What to eat</h3><p lang="pl">Obwarzanek z ulicznego wózka, zapiekanka na Placu Nowym, pierogi, żurek w chlebie i oscypek z żurawiną na Rynku.</p><p lang="en">An obwarzanek from a street cart, a zapiekanka on Plac Nowy, pierogi, sour rye soup in a bread bowl and grilled oscypek cheese with cranberry.</p></div>
+      <div class="card"><h3 lang="pl">🎟️ Bilety z wyprzedzeniem</h3><h3 lang="en">🎟️ Book ahead</h3><p lang="pl">Wawel, Fabryka Schindlera i Kopalnia w Wieliczce mają limity wejść. W weekendy kup bilety online kilka dni wcześniej.</p><p lang="en">Wawel, Schindler's Factory and the Wieliczka Salt Mine have limited entry. At weekends buy tickets online a few days ahead.</p></div>
+      <div class="card"><h3 lang="pl">🌧️ Gdy pada</h3><h3 lang="en">🌧️ On a rainy day</h3><p lang="pl">Podziemia Rynku, Muzeum Narodowe, Muzeum Inżynierii i Techniki na Kazimierzu albo kopalnia w Wieliczce, gdzie pogoda nie ma znaczenia.</p><p lang="en">The Rynek Underground, the National Museum, the Museum of Engineering and Technology in Kazimierz, or the salt mine, where weather does not matter.</p></div>
+      <div class="card"><h3 lang="pl">🚗 Wycieczki na cały dzień</h3><h3 lang="en">🚗 Day trips</h3><p lang="pl">Ojcowski Park Narodowy (ok. 40 min), Zakopane i Tatry (ok. 2 h), Miejsce Pamięci Auschwitz-Birkenau (ok. 1 h 15 min, rezerwacja konieczna).</p><p lang="en">Ojców National Park (about 40 min), Zakopane and the Tatras (about 2 h), the Auschwitz-Birkenau Memorial (about 1 h 15 min, booking required).</p></div>
+      <div class="card"><h3 lang="pl">🛍️ Zakupy w niedzielę</h3><h3 lang="en">🛍️ Sunday shopping</h3><p lang="pl">W Polsce większość sklepów i supermarketów jest zamknięta w niedziele niehandlowe. Otwarte są zwykle Żabki i małe sklepy osiedlowe, więc zakupy na niedzielę zrób w sobotę.</p><p lang="en">In Poland most shops and supermarkets are closed on non-trading Sundays. Żabka and small corner shops usually stay open, so do your Sunday shopping on Saturday.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>Kozia Bagry Apartments</b> · ul. Kozia 5, 30-733 Kraków ·
+    <a href="https://www.booking.com/searchresults.html?ss=Kozia+Bagry+Apartments" target="_blank" rel="noopener"><span lang="pl">Rezerwacja przez Booking.com</span><span lang="en">Book via Booking.com</span></a>
+    <div class="credits"><span lang="pl">Zdjęcia Krakowa: Wikimedia Commons</span><span lang="en">Kraków photos: Wikimedia Commons</span> —
+      Rynek: Igor123121, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>;
+      Wawel: Jakub Hałun, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
+      Kazimierz: Igor123121, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
+      Kładka Bernatka: Jakub Hałun, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
+      Bulwary: ViktoriaLi, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
+      Kopiec Krakusa: Piotr Pawelczyk, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
+      Wieliczka: Arian Zwegers, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>;
+      Zalew Bagry: Zygmunt Put Zetpe0202, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+      <span lang="pl">Mapa © współtwórcy OpenStreetMap.</span><span lang="en">Map © OpenStreetMap contributors.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb"><img alt=""></div>
+<script>
+  const setL = (l) => { document.documentElement.dataset.l = l; document.documentElement.lang = l; localStorage.setItem("l", l); document.querySelectorAll(".lang button").forEach((b) => b.classList.toggle("on", b.dataset.set === l)); };
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => setL(b.dataset.set)));
+  setL(document.documentElement.dataset.l);
+  const lb = document.getElementById("lb");
+  document.querySelectorAll(".gallery img").forEach((i) => i.addEventListener("click", () => { lb.querySelector("img").src = i.src; lb.classList.add("on"); }));
+  lb.addEventListener("click", () => lb.classList.remove("on"));
+</script>
+</body>
+</html>
