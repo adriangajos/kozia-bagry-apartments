@@ -72,7 +72,7 @@ html[data-l="pl"] [lang="en"], html[data-l="en"] [lang="pl"] { display: none !im
 .facts div { padding: 16px 20px 0 0; border-top: 1px solid var(--lake); }
 .facts dt { font-size: 14.5px; color: var(--soft); }
 .facts dd { margin: 2px 0 0; font-size: 19px; font-weight: 600; line-height: 1.25; color: var(--lake); }
-.after { margin-top: 28px; max-width: 70ch; }
+.after { margin-top: 28px; }
 .after.more, .panel p.more { margin-top: 12px; }
 
 /* Dostępność */
