@@ -68,11 +68,12 @@ html[data-l="pl"] [lang="en"], html[data-l="en"] [lang="pl"] { display: none !im
 .gallery figure:nth-child(5) { grid-column: span 5; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform .8s var(--ease); }
 .gallery figure:hover img { transform: scale(1.04); }
-.facts { display: grid; grid-template-columns: repeat(6, 1fr); margin: clamp(32px, 5vw, 56px) 0 0; border-top: 1px solid var(--lake); }
-.facts div { padding: 16px 16px 0 0; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 28px; margin: clamp(32px, 5vw, 56px) 0 0; }
+.facts div { padding: 16px 20px 0 0; border-top: 1px solid var(--lake); }
 .facts dt { font-size: 14.5px; color: var(--soft); }
 .facts dd { margin: 2px 0 0; font-size: 19px; font-weight: 600; line-height: 1.25; color: var(--lake); }
 .after { margin-top: 28px; max-width: 70ch; }
+.after.more, .panel p.more { margin-top: 12px; }
 
 /* Dostępność */
 .book { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 32px 64px; align-items: start; }
@@ -197,7 +198,6 @@ html.js .rv.in { opacity: 1; transform: none; }
 @media (max-width: 980px) {
   .head, .hero-row, .book, .near, .panel, .contact { grid-template-columns: minmax(0, 1fr); }
   .hero-cta { justify-content: flex-start; }
-  .facts { grid-template-columns: repeat(3, 1fr); }
   .mapbox { position: static; }
   .mapbox iframe { height: 360px; }
   .idea, .idea:nth-child(n) { grid-column: span 6; }
