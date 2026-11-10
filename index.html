@@ -86,11 +86,74 @@
   .lb { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; place-items: center; z-index: 50; cursor: zoom-out; }
   .lb.on { display: grid; }
   .lb img { max-width: 94vw; max-height: 90vh; border-radius: 8px; }
+
+  /* --- Animacje --- */
+  .progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: linear-gradient(90deg, var(--gold), #e3b958); transform-origin: 0 50%; transform: scaleX(0); z-index: 20; }
+  nav.menu a { position: relative; padding: 4px 0; transition: color .3s; }
+  nav.menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--gold); border-radius: 2px; transform: scaleX(0); transform-origin: 0 50%; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  nav.menu a.active { color: var(--ink); }
+  nav.menu a.active::after, nav.menu a:hover::after { transform: scaleX(1); }
+  .btn { transition: transform .25s, box-shadow .25s, background .25s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.18); }
+  .lang button { transition: background .3s, color .3s; }
+
+  .hero img { animation: kenburns 22s ease-out both; will-change: transform; }
+  @keyframes kenburns { from { transform: scale(1.14); } to { transform: scale(1); } }
+  .hero .wrap > * { animation: rise .9s cubic-bezier(.2,.8,.2,1) both; }
+  .hero .wrap > :nth-child(2), .hero .wrap > :nth-child(3) { animation-delay: .15s; }
+  .hero .wrap > :nth-child(4), .hero .wrap > :nth-child(5) { animation-delay: .3s; }
+  .hero .wrap > :nth-child(6), .hero .wrap > :nth-child(7) { animation-delay: .45s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .scroll-cue { position: absolute; left: 50%; bottom: 16px; z-index: 1; width: 26px; height: 42px; margin-left: -13px; border: 2px solid rgba(255,255,255,.7); border-radius: 14px; }
+  .scroll-cue::after { content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: #fff; animation: cue 1.8s infinite; }
+  @keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+
+  /* Wejście sekcji i kart przy przewijaniu (tylko gdy działa JS) */
+  html.js .rv { opacity: 0; transform: translateY(40px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0s); }
+  html.js .rv.l { transform: translateX(-50px); }
+  html.js .rv.r { transform: translateX(50px); }
+  html.js .rv.z { transform: scale(.92); }
+  html.js .rv.in { opacity: 1; transform: none; }
+  section.block h2 { position: relative; }
+  section.block .eyebrow { display: inline-block; position: relative; }
+  html.js section.block .eyebrow::after { content: ""; position: absolute; left: 0; bottom: -3px; height: 2px; width: 100%; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; transition: transform 1s .3s cubic-bezier(.2,.8,.2,1); }
+  html.js section.block .eyebrow.seen::after { transform: scaleX(1); }
+
+  /* Najazd zdjęć i karty unoszące się */
+  .idea, .card, .fact { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, opacity .8s cubic-bezier(.2,.8,.2,1); }
+  .idea:hover, .card:hover, .fact:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(31,35,38,.12); }
+  .idea .ph { overflow: hidden; }
+  .idea img { transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .idea:hover img { transform: scale(1.08); }
+  .gallery figure { margin: 0; overflow: hidden; border-radius: 10px; }
+  .gallery img { transition: transform .9s cubic-bezier(.2,.8,.2,1), filter .4s; }
+  .gallery img:hover { transform: scale(1.06); filter: brightness(1.06); }
+  table.near tr { transition: background .25s; }
+  table.near tr:hover { background: var(--gold-soft); }
+
+  /* Lightbox z płynnym powiększeniem */
+  .lb { display: grid; opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s; }
+  .lb.on { opacity: 1; visibility: visible; }
+  .lb img { transform: scale(.9); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .lb.on img { transform: none; }
+
+  /* Przejście przy zmianie języka */
+  ::view-transition-old(root) { animation: vt-out .25s ease both; }
+  ::view-transition-new(root) { animation: vt-in .35s ease both; }
+  @keyframes vt-out { to { opacity: 0; transform: translateY(-8px); } }
+  @keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+    html.js .rv { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
-<script>document.documentElement.dataset.l = localStorage.getItem("l") || ((navigator.language || "pl").startsWith("pl") ? "pl" : "en");</script>
+<script>document.documentElement.classList.add("js"); document.documentElement.dataset.l =localStorage.getItem("l") || ((navigator.language || "pl").startsWith("pl") ? "pl" : "en");</script>
 
+<div class="progress" id="progress"></div>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#">Kozia <span>Bagry</span> Apartments</a>
@@ -116,6 +179,7 @@
     <a class="btn" href="https://www.booking.com/searchresults.html?ss=Kozia+Bagry+Apartments" target="_blank" rel="noopener"><span lang="pl">Zarezerwuj na Booking.com</span><span lang="en">Book on Booking.com</span></a>
     <a class="btn ghost" href="#weekend"><span lang="pl">Co robić w Krakowie</span><span lang="en">Things to do</span></a>
   </div>
+  <a class="scroll-cue" href="#apartament" aria-label="Przewiń"></a>
 </section>
 
 <section class="block" id="apartament">
@@ -126,15 +190,15 @@
     <p class="lead" lang="pl">Jasny salon z jadalnią, osobna sypialnia, w pełni wyposażona kuchnia z czajnikiem i zestawem herbat, łazienka z prysznicem i balkon z widokiem na zieleń. W środku klimatyzacja i szybkie Wi-Fi.</p>
     <p class="lead" lang="en">A bright living room with a dining area, a separate bedroom, a fully equipped kitchen with a kettle and a tea selection, a bathroom with a walk-in shower and a balcony overlooking greenery. Air conditioning and fast Wi-Fi inside.</p>
     <div class="gallery">
-      <img class="big" src="img/salon.jpg" alt="Salon">
-      <img src="img/sypialnia.jpg" alt="Sypialnia">
-      <img src="img/jadalnia.jpg" alt="Jadalnia">
-      <img src="img/kuchnia.jpg" alt="Kuchnia">
-      <img src="img/lazienka.jpg" alt="Łazienka">
-      <img src="img/sypialnia-2.jpg" alt="Łóżko">
-      <img src="img/balkon.jpg" alt="Balkon">
-      <img src="img/herbata.jpg" alt="Kącik kawowo-herbaciany">
-      <img src="img/budynek.jpg" alt="Budynek Kozia 5">
+      <figure class="big"><img src="img/salon.jpg" alt="Salon"></figure>
+      <figure><img src="img/sypialnia.jpg" alt="Sypialnia"></figure>
+      <figure><img src="img/jadalnia.jpg" alt="Jadalnia"></figure>
+      <figure><img src="img/kuchnia.jpg" alt="Kuchnia"></figure>
+      <figure><img src="img/lazienka.jpg" alt="Łazienka"></figure>
+      <figure><img src="img/sypialnia-2.jpg" alt="Łóżko"></figure>
+      <figure><img src="img/balkon.jpg" alt="Balkon"></figure>
+      <figure><img src="img/herbata.jpg" alt="Kącik kawowo-herbaciany"></figure>
+      <figure><img src="img/budynek.jpg" alt="Budynek Kozia 5"></figure>
     </div>
     <div class="facts">
       <div class="fact"><b lang="pl">Zameldowanie</b><b lang="en">Check-in</b><span lang="pl">od 15:00, samodzielne</span><span lang="en">from 15:00, self check-in</span></div>
@@ -183,42 +247,42 @@
     <p class="lead" lang="pl">Najlepiej łączyć je w pary: rano zabytki, popołudniu spacer nad Wisłą, wieczorem Kazimierz. Ze stacji Kraków Prokocim pociągiem SKA1 dojedziesz do Krakowa Głównego w ok. 10 minut, a taksówką do Starego Miasta jedzie się zwykle 15–20 minut.</p>
     <p class="lead" lang="en">They pair up nicely: sights in the morning, a riverside walk in the afternoon, Kazimierz in the evening. The SKA1 train from Kraków Prokocim reaches Kraków Główny in about 10 minutes, and a taxi to the Old Town usually takes 15–20 minutes.</p>
     <div class="ideas">
-      <article class="idea"><img src="img/krk-rynek.jpg" alt="Rynek Główny i Sukiennice" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-rynek.jpg" alt="Rynek Główny i Sukiennice" loading="lazy"></div><div class="in">
         <h3 lang="pl">Rynek Główny i Sukiennice</h3><h3 lang="en">Main Square and the Cloth Hall</h3>
         <p lang="pl">Jeden z największych średniowiecznych placów Europy. Posłuchaj hejnału z wieży Mariackiej o pełnej godzinie, zajrzyj do ołtarza Wita Stwosza i zejdź do Podziemi Rynku.</p>
         <p lang="en">One of Europe's largest medieval squares. Hear the bugle call from St Mary's tower on the hour, see the Veit Stoss altarpiece and go down to the Rynek Underground museum.</p>
         <div class="how" lang="pl">Pół dnia · SKA1 do Krakowa Głównego + 10 min pieszo</div><div class="how" lang="en">Half a day · SKA1 to Kraków Główny + 10 min walk</div></div></article>
-      <article class="idea"><img src="img/krk-wawel.jpg" alt="Wawel" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-wawel.jpg" alt="Wawel" loading="lazy"></div><div class="in">
         <h3 lang="pl">Wawel: zamek, katedra i Smok</h3><h3 lang="en">Wawel: castle, cathedral and the Dragon</h3>
         <p lang="pl">Królewski zamek, katedra z dzwonem Zygmunta i Smocza Jama ze ziejącym ogniem smokiem nad Wisłą. Bilety na komnaty warto kupić online z wyprzedzeniem.</p>
         <p lang="en">The royal castle, the cathedral with the Sigismund Bell and the Dragon's Den with a fire-breathing dragon by the river. Book state room tickets online in advance.</p>
         <div class="how" lang="pl">Pół dnia</div><div class="how" lang="en">Half a day</div></div></article>
-      <article class="idea"><img src="img/krk-kazimierz.jpg" alt="Kazimierz, ulica Szeroka" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-kazimierz.jpg" alt="Kamienice przy ulicy Szerokiej na Kazimierzu" loading="lazy"></div><div class="in">
         <h3 lang="pl">Kazimierz: klimat, jedzenie, wieczór</h3><h3 lang="en">Kazimierz: atmosphere, food and nightlife</h3>
         <p lang="pl">Dawna dzielnica żydowska: synagogi przy Szerokiej, zapiekanki z okrąglaka na Placu Nowym, małe kawiarnie i bary. Najlepszy na wieczór.</p>
         <p lang="en">The former Jewish quarter: synagogues on Szeroka Street, zapiekanka from the round hall on Plac Nowy, cosy cafés and bars. Best in the evening.</p>
         <div class="how" lang="pl">Wieczór · ok. 15 min taksówką</div><div class="how" lang="en">Evening · about 15 min by taxi</div></div></article>
-      <article class="idea"><img src="img/krk-bulwary.jpg" alt="Bulwary Wiślane" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-bulwary.jpg" alt="Bulwary Wiślane" loading="lazy"></div><div class="in">
         <h3 lang="pl">Kładka Bernatka i bulwary nad Wisłą</h3><h3 lang="en">Bernatek footbridge and the Vistula boulevards</h3>
         <p lang="pl">Przejdź kładką z Kazimierza do Podgórza, popatrz na akrobatów nad głową, a potem spaceruj bulwarami pod Wawel. Latem możesz wsiąść na krótki rejs statkiem.</p>
         <p lang="en">Cross the footbridge from Kazimierz to Podgórze, look up at the acrobat sculptures, then stroll along the river to Wawel. In summer you can hop on a short boat cruise.</p>
         <div class="how" lang="pl">2–3 godziny</div><div class="how" lang="en">2–3 hours</div></div></article>
-      <article class="idea"><img src="img/krk-bernatka.jpg" alt="Kładka Ojca Bernatka, Podgórze" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-bernatka.jpg" alt="Kładka Ojca Bernatka, Podgórze" loading="lazy"></div><div class="in">
         <h3 lang="pl">Podgórze: Fabryka Schindlera i MOCAK</h3><h3 lang="en">Podgórze: Schindler's Factory and MOCAK</h3>
         <p lang="pl">Poruszająca wystawa o Krakowie w czasie okupacji w Fabryce Emalia Oskara Schindlera, a obok muzeum sztuki współczesnej MOCAK. Zajrzyj też na Plac Bohaterów Getta.</p>
         <p lang="en">A moving exhibition on wartime Kraków in Oskar Schindler's Enamel Factory, with the MOCAK contemporary art museum next door. Also see Ghetto Heroes Square.</p>
         <div class="how" lang="pl">Pół dnia · najbliższe od nas: ok. 15 min</div><div class="how" lang="en">Half a day · closest from us: about 15 min</div></div></article>
-      <article class="idea"><img src="img/krk-krakus.jpg" alt="Kopiec Krakusa o wschodzie słońca" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-krakus.jpg" alt="Kopiec Krakusa o wschodzie słońca" loading="lazy"></div><div class="in">
         <h3 lang="pl">Zachód słońca na Kopcu Krakusa</h3><h3 lang="en">Sunset on Krakus Mound</h3>
         <p lang="pl">Najstarszy kopiec Krakowa z panoramą na całe miasto i Tatry przy dobrej pogodzie. Pod spodem dawny kamieniołom Liban. Wstęp wolny.</p>
         <p lang="en">Kraków's oldest mound with a view over the whole city, and the Tatras on a clear day. The old Liban quarry lies below. Free entry.</p>
         <div class="how" lang="pl">1–2 godziny · ok. 10 min autem</div><div class="how" lang="en">1–2 hours · about 10 min by car</div></div></article>
-      <article class="idea"><img src="img/krk-wieliczka.jpg" alt="Kaplica św. Kingi w Kopalni Soli Wieliczka" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-wieliczka.jpg" alt="Kaplica św. Kingi w Kopalni Soli Wieliczka" loading="lazy"></div><div class="in">
         <h3 lang="pl">Kopalnia Soli „Wieliczka”</h3><h3 lang="en">Wieliczka Salt Mine</h3>
         <p lang="pl">Podziemne kaplice wyrzeźbione w soli, w tym zachwycająca kaplica św. Kingi. Z Kozia 5 to jedna z najbliższych wielkich atrakcji: pociąg SKA1 ze stacji Prokocim jedzie prosto do Wieliczki.</p>
         <p lang="en">Underground chapels carved in salt, including the stunning St Kinga's Chapel. One of the closest big sights from Kozia 5: the SKA1 train from Prokocim goes straight to Wieliczka.</p>
         <div class="how" lang="pl">Pół dnia · SKA1 ok. 20 min</div><div class="how" lang="en">Half a day · SKA1 about 20 min</div></div></article>
-      <article class="idea"><img src="img/krk-bagry.jpg" alt="Zalew Bagry" loading="lazy"><div class="in">
+      <article class="idea"><div class="ph"><img src="img/krk-bagry.jpg" alt="Zalew Bagry" loading="lazy"></div><div class="in">
         <h3 lang="pl">Poranek nad Zalewem Bagry</h3><h3 lang="en">A morning at Bagry Lake</h3>
         <p lang="pl">Bieganie lub spacer dookoła zalewu, chwila przy tężni, a latem plaża, kąpiel i deska SUP. Wszystko 5 minut od drzwi.</p>
         <p lang="en">A run or a walk around the lake, a moment by the brine tower, and in summer the beach, a swim and stand-up paddleboarding. All five minutes from the door.</p>
@@ -298,7 +362,7 @@
     <div class="credits"><span lang="pl">Zdjęcia Krakowa: Wikimedia Commons</span><span lang="en">Kraków photos: Wikimedia Commons</span> —
       Rynek: Igor123121, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>;
       Wawel: Jakub Hałun, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
-      Kazimierz: Igor123121, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
+      Kazimierz: Zygmunt Put, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
       Kładka Bernatka: Jakub Hałun, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
       Bulwary: ViktoriaLi, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
       Kopiec Krakusa: Piotr Pawelczyk, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>;
@@ -312,11 +376,47 @@
 <div class="lb" id="lb"><img alt=""></div>
 <script>
   const setL = (l) => { document.documentElement.dataset.l = l; document.documentElement.lang = l; localStorage.setItem("l", l); document.querySelectorAll(".lang button").forEach((b) => b.classList.toggle("on", b.dataset.set === l)); };
-  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => setL(b.dataset.set)));
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
+    if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(() => setL(b.dataset.set));
+    else setL(b.dataset.set);
+  }));
   setL(document.documentElement.dataset.l);
   const lb = document.getElementById("lb");
   document.querySelectorAll(".gallery img").forEach((i) => i.addEventListener("click", () => { lb.querySelector("img").src = i.src; lb.classList.add("on"); }));
   lb.addEventListener("click", () => lb.classList.remove("on"));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") lb.classList.remove("on"); });
+
+  // Animacje wejścia: nagłówki, opisy i karty pojawiają się kolejno przy przewijaniu.
+  document.documentElement.classList.add("js");
+  const mark = (els, kind = "", step = 0.08) => els.forEach((el, i) => { el.classList.add("rv"); if (kind) el.classList.add(kind); el.style.setProperty("--d", (i % 6) * step + "s"); });
+  document.querySelectorAll("section.block .wrap").forEach((w) => mark([...w.querySelectorAll(":scope > .eyebrow, :scope > h2, :scope > .lead")], "", 0.1));
+  mark([...document.querySelectorAll(".gallery figure")], "z", 0.07);
+  mark([...document.querySelectorAll(".fact")], "", 0.06);
+  document.querySelectorAll(".ideas .idea").forEach((el, i) => mark([el], i % 2 ? "r" : "l", 0));
+  mark([...document.querySelectorAll(".route .card")], "", 0.12);
+  mark([...document.querySelectorAll("#porady .card")], "", 0.08);
+  mark([...document.querySelectorAll("table.near, .map")], "", 0.1);
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { const t = e.target; t.classList.add("in", "seen"); io.unobserve(t); setTimeout(() => t.classList.remove("rv", "l", "r", "z", "in"), 1600); } }), { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".rv").forEach((el) => io.observe(el));
+
+  // Pasek postępu, paralaksa zdjęcia na górze i podświetlenie aktywnej sekcji w menu.
+  const bar = document.getElementById("progress");
+  const heroImg = document.querySelector(".hero img");
+  const links = [...document.querySelectorAll("nav.menu a")];
+  const secs = links.map((a) => document.querySelector(a.getAttribute("href")));
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let ticking = false;
+  const onScroll = () => {
+    ticking = false;
+    const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (!still && y < innerHeight) heroImg.style.translate = `0 ${y * 0.35}px`;
+    let cur = -1;
+    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < innerHeight * 0.4) cur = i; });
+    links.forEach((a, i) => a.classList.toggle("active", i === cur));
+  };
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
 </script>
 </body>
 </html>
